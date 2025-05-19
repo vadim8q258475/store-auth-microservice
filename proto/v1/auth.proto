@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = ".;authpbv1";
+
+
+service AuthService{
+    rpc Login(Login.Request)returns(Login.Response);
+    rpc Register(Register.Request)returns(Register.Response);
+    rpc IsTokenValid(IsTokenValid.Request)returns(IsTokenValid.Response);
+}
+
+message Login{
+    message Request{
+        string email = 1;
+        string password = 2;
+    }
+    message Response{
+        string token = 1;
+    }
+}
+
+message Register{
+    message Request{
+        string email = 1;
+        string password = 2;
+    }
+    message Response{
+        bool success = 1;
+    }
+}
+
+message IsTokenValid{
+    message Request{
+        string token = 1;
+    }
+    message Response{
+        string id = 1;
+    }
+}

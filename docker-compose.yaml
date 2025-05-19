@@ -1,0 +1,41 @@
+version: '3.0'
+
+services:
+  auth1:
+    build: .
+    container_name: auth-store-microservice-container-1
+    env_file:
+      - .env
+    networks:
+      - store-net
+  auth2:
+    build: .
+    container_name: auth-store-microservice-container-2
+    env_file:
+      - .env
+    networks:
+      - store-net
+  auth3:
+    build: .
+    container_name: auth-store-microservice-container-3
+    env_file:
+      - .env
+    networks:
+      - store-net
+  auth-nginx:
+    image: nginx
+    ports:
+      - "2236:2236"
+    volumes:
+      - ./auth-nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - store-net
+    depends_on:
+      - auth1
+      - auth2
+      - auth3
+
+networks:
+  store-net:
+    external: true
+    name: store-net
