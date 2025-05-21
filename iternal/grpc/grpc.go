@@ -30,15 +30,15 @@ func (g *GrpcService) IsTokenValid(ctx context.Context, request *gen.IsTokenVali
 }
 
 func (g *GrpcService) Login(ctx context.Context, request *gen.Login_Request) (*gen.Login_Response, error) {
-	user, err := g.service.GetUser(ctx, request.Email)
+	response, err := g.service.GetUser(ctx, request.Email)
 	if err != nil {
 		return nil, err
 	}
-	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.Password))
+	err = bcrypt.CompareHashAndPassword([]byte(response.User.Password), []byte(request.Password))
 	if err != nil {
 		return nil, err
 	}
-	token, err := g.service.GenToken(user.Id)
+	token, err := g.service.GenToken(response.User.Id)
 	if err != nil {
 		return nil, err
 	}

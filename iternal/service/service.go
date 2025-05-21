@@ -12,7 +12,7 @@ import (
 
 type Service interface {
 	GetUser(ctx context.Context, email string) (*userpb.GetByEmail_Response, error)
-	GenToken(id string) (string, error)
+	GenToken(id uint32) (string, error)
 	Create(ctx context.Context, email, password string) error
 	IsTokenValid(ctx context.Context, tokenString string) (uint32, error)
 }
@@ -34,7 +34,7 @@ func (s *service) GetUser(ctx context.Context, email string) (*userpb.GetByEmail
 	return s.client.GetByEmail(ctx, request)
 }
 
-func (s *service) GenToken(id string) (string, error) {
+func (s *service) GenToken(id uint32) (string, error) {
 	_, token, err := s.authToken.Encode(map[string]interface{}{"id": id})
 	return token, err
 }
