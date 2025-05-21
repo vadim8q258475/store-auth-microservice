@@ -27,7 +27,7 @@ message Register{
         string password = 2;
     }
     message Response{
-        bool success = 1;
+        uint32 id = 1;
     }
 }
 
@@ -36,6 +36,6 @@ message IsTokenValid{
         string token = 1;
     }
     message Response{
-        string id = 1;
+        uint32 id = 1;
     }
 }

@@ -279,7 +279,7 @@ func (x *Register_Request) GetPassword() string {
 
 type Register_Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -314,11 +314,11 @@ func (*Register_Response) Descriptor() ([]byte, []int) {
 	return file_auth_proto_rawDescGZIP(), []int{1, 1}
 }
 
-func (x *Register_Response) GetSuccess() bool {
+func (x *Register_Response) GetId() uint32 {
 	if x != nil {
-		return x.Success
+		return x.Id
 	}
-	return false
+	return 0
 }
 
 type IsTokenValid_Request struct {
@@ -367,7 +367,7 @@ func (x *IsTokenValid_Request) GetToken() string {
 
 type IsTokenValid_Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -402,11 +402,11 @@ func (*IsTokenValid_Response) Descriptor() ([]byte, []int) {
 	return file_auth_proto_rawDescGZIP(), []int{2, 1}
 }
 
-func (x *IsTokenValid_Response) GetId() string {
+func (x *IsTokenValid_Response) GetId() uint32 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 var File_auth_proto protoreflect.FileDescriptor
@@ -420,18 +420,18 @@ const file_auth_proto_rawDesc = "" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x1a \n" +
 	"\bResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"m\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"c\n" +
 	"\bRegister\x1a;\n" +
 	"\aRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\x1a$\n" +
-	"\bResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"K\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x1a\x1a\n" +
+	"\bResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\"K\n" +
 	"\fIsTokenValid\x1a\x1f\n" +
 	"\aRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x1a\x1a\n" +
 	"\bResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\xc7\x01\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id2\xc7\x01\n" +
 	"\vAuthService\x122\n" +
 	"\x05Login\x12\x13.auth.Login.Request\x1a\x14.auth.Login.Response\x12;\n" +
 	"\bRegister\x12\x16.auth.Register.Request\x1a\x17.auth.Register.Response\x12G\n" +

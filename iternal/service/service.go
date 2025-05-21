@@ -11,10 +11,10 @@ import (
 )
 
 type Service interface {
-	GetUser(ctx context.Context, email string) (*userpb.GetByEmail_Response, error)
-	GenToken(id string) (string, error)
+	GetUser(ctx context.Context, email string) (*userpb.User, error)
+	GenToken(id uint32) (string, error)
 	Create(ctx context.Context, email, password string) error
-	IsTokenValid(ctx context.Context, tokenString string) (string, error)
+	IsTokenValid(ctx context.Context, tokenString string) (uint32, error)
 }
 
 type service struct {
@@ -29,12 +29,12 @@ func NewService(client userpb.UserServiceClient, authToken *jwtauth.JWTAuth) Ser
 	}
 }
 
-func (s *service) GetUser(ctx context.Context, email string) (*userpb.GetByEmail_Response, error) {
-	request := &userpb.GetByEmail_Request{Email: email}
-	return s.client.GetByEmail(ctx, request)
+func (s *service) GetUser(ctx context.Context, id uint32) (*userpb.User, error) {
+	request := &userpb.GetByID_Request{Id: id}
+	return request
 }
 
-func (s *service) GenToken(id string) (string, error) {
+func (s *service) GenToken(id uint32) (string, error) {
 	_, token, err := s.authToken.Encode(map[string]interface{}{"id": id})
 	return token, err
 }
@@ -47,22 +47,22 @@ func (s *service) Create(ctx context.Context, email, password string) error {
 	return err
 }
 
-func (s *service) IsTokenValid(ctx context.Context, tokenString string) (string, error) {
+func (s *service) IsTokenValid(ctx context.Context, tokenString string) (uint32, error) {
 	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
 
 	token, err := s.authToken.Decode(tokenString)
 	if err != nil {
-		return "", err
+		return 0, err
 	}
 
 	claims, err := token.AsMap(ctx)
 	if err != nil {
-		return "", err
+		return 0, err
 	}
 
-	id, ok := claims["id"].(string)
-	if !ok || id == "" {
-		return "", errors.New("id claim not found or invalid")
+	id, ok := claims["id"].(uint32)
+	if !ok {
+		return 0, errors.New("id claim not found or invalid")
 	}
 
 	return id, nil

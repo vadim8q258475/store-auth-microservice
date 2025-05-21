@@ -1,4 +1,4 @@
-module github.com/vadim8q258475/store-auth-microservice
+module github.com/vadim8q258475/store-auth2-microservice
 
 go 1.23.0
 
@@ -7,11 +7,12 @@ toolchain go1.23.9
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/go-chi/jwtauth v1.2.0
-	github.com/vadim8q258475/store-user-microservice v0.0.2
+	github.com/vadim8q258475/store-auth-microservice v0.0.1
+	github.com/vadim8q258475/store-user-microservice v0.0.4
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.38.0
 	google.golang.org/grpc v1.72.1
-	google.golang.org/protobuf v1.36.5
+	google.golang.org/protobuf v1.36.6
 )
 
 require (
@@ -22,7 +23,6 @@ require (
 	github.com/lestrrat-go/jwx v1.1.0 // indirect
 	github.com/lestrrat-go/option v1.0.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/vadim8q258475/store-product-microservice v0.0.2 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
