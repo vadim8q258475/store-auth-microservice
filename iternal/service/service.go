@@ -11,8 +11,8 @@ import (
 )
 
 type Service interface {
-	GetUser(ctx context.Context, email string) (*userpb.User, error)
-	GenToken(id uint32) (string, error)
+	GetUser(ctx context.Context, email string) (*userpb.GetByEmail_Response, error)
+	GenToken(id string) (string, error)
 	Create(ctx context.Context, email, password string) error
 	IsTokenValid(ctx context.Context, tokenString string) (uint32, error)
 }
@@ -29,12 +29,12 @@ func NewService(client userpb.UserServiceClient, authToken *jwtauth.JWTAuth) Ser
 	}
 }
 
-func (s *service) GetUser(ctx context.Context, id uint32) (*userpb.User, error) {
-	request := &userpb.GetByID_Request{Id: id}
-	return request
+func (s *service) GetUser(ctx context.Context, email string) (*userpb.GetByEmail_Response, error) {
+	request := &userpb.GetByEmail_Request{Email: email}
+	return s.client.GetByEmail(ctx, request)
 }
 
-func (s *service) GenToken(id uint32) (string, error) {
+func (s *service) GenToken(id string) (string, error) {
 	_, token, err := s.authToken.Encode(map[string]interface{}{"id": id})
 	return token, err
 }

@@ -62,5 +62,5 @@ func (g *GrpcService) Register(ctx context.Context, request *gen.Register_Reques
 	if err != nil {
 		return nil, err
 	}
-	return &gen.Register_Response{Success: true}, nil
+	return &gen.Register_Response{}, nil
 }
