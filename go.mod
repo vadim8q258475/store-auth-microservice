@@ -2,8 +2,6 @@ module github.com/vadim8q258475/store-auth-microservice
 
 go 1.23.0
 
-toolchain go1.23.9
-
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/go-chi/jwtauth v1.2.0
