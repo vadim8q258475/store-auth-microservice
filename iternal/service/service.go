@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/go-chi/jwtauth"
@@ -55,15 +56,20 @@ func (s *service) IsTokenValid(ctx context.Context, tokenString string) (uint32,
 		return 0, err
 	}
 
+	fmt.Println(token)
+	fmt.Println(tokenString)
+
 	claims, err := token.AsMap(ctx)
+	fmt.Println(claims)
 	if err != nil {
 		return 0, err
 	}
 
-	id, ok := claims["id"].(uint32)
+	id, ok := claims["id"]
 	if !ok {
 		return 0, errors.New("id claim not found or invalid")
 	}
-
-	return id, nil
+	uint32Id := uint32(id.(float64))
+	fmt.Println(uint32Id)
+	return uint32Id, nil
 }

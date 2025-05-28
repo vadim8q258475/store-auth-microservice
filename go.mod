@@ -7,7 +7,7 @@ toolchain go1.23.9
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/go-chi/jwtauth v1.2.0
-	github.com/vadim8q258475/store-user-microservice v0.0.5
+	github.com/vadim8q258475/store-user-microservice v0.0.6
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.38.0
 	google.golang.org/grpc v1.72.1
